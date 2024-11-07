@@ -1,0 +1,41 @@
+{
+  "name": "create-project",
+  "version": "1.0.0",
+  "description": "create a project with gitlab template",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "create-project": "index.js"
+  },
+  "scripts": {
+    "dev": "unbuild --stub",
+    "build": "unbuild",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "publishConfig": {
+    "registry": "https://nexus.uzhicai.com/repository/npm-hosted/"
+  },
+  "files": [
+    "index.js",
+    "dist"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "template-mobile": "git+http://gitlab.ahyzc.com/yzc-public-tools/template-mobile.git"
+  },
+  "devDependencies": {
+    "@types/minimist": "^1.2.5",
+    "@types/prompts": "^2.4.9",
+    "cross-spawn": "^7.0.3",
+    "esbuild": "^0.24.0",
+    "minimist": "^1.2.8",
+    "picocolors": "^1.1.1",
+    "prompts": "^2.4.2",
+    "unbuild": "^2.0.0"
+  },
+  "resolutions": {
+    "esbuild": "0.24.0"
+  }
+}
