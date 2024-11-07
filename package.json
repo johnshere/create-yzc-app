@@ -8,7 +8,7 @@
     "create-yzc-app": "index.js"
   },
   "scripts": {
-    "dev": "unbuild --stub",
+    "dev": "unbuild --stub & node ./dist/index.mjs",
     "build": "unbuild",
     "typecheck": "tsc --noEmit",
     "postinstall": "git clone http://gitlab.ahyzc.com/yzc-public-tools/template-mobile.git",

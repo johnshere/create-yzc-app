@@ -171,20 +171,6 @@ async function init() {
             }
           }),
         },
-        // {
-        //   type: (framework: Framework) =>
-        //     framework ? 'select' : null,
-        //   name: 'variant',
-        //   message: reset('Select a variant:'),
-        //   choices: (framework: Framework) =>
-        //     framework.variants.map((variant) => {
-        //       const variantColor = variant.color
-        //       return {
-        //         title: variantColor(variant.display || variant.name),
-        //         value: variant.name,
-        //       }
-        //     }),
-        // },
       ],
       {
         onCancel: () => {
@@ -198,7 +184,6 @@ async function init() {
   }
 
   // user choice associated with prompts
-  // const { framework, overwrite, packageName, variant } = result
   const { framework, overwrite, packageName } = result
 
   const root = path.join(cwd, targetDir)
@@ -214,49 +199,6 @@ async function init() {
 
   const pkgInfo = pkgFromUserAgent(process.env.npm_config_user_agent)
   const pkgManager = pkgInfo ? pkgInfo.name : 'npm'
-  // const isYarn1 = pkgManager === 'yarn' && pkgInfo?.version.startsWith('1.')
-
-  // const { customCommand } =
-  //   FRAMEWORKS.flatMap((f) => f.variants).find((v) => v.name === template) ?? {}
-
-  // if (customCommand) {
-  //   const fullCustomCommand = customCommand
-  //     .replace(/^npm create /, () => {
-  //       // `bun create` uses it's own set of templates,
-  //       // the closest alternative is using `bun x` directly on the package
-  //       if (pkgManager === 'bun') {
-  //         return 'bun x create-'
-  //       }
-  //       return `${pkgManager} create `
-  //     })
-  //     // Only Yarn 1.x doesn't support `@version` in the `create` command
-  //     .replace('@latest', () => (isYarn1 ? '' : '@latest'))
-  //     .replace(/^npm exec/, () => {
-  //       // Prefer `pnpm dlx`, `yarn dlx`, or `bun x`
-  //       if (pkgManager === 'pnpm') {
-  //         return 'pnpm dlx'
-  //       }
-  //       if (pkgManager === 'yarn' && !isYarn1) {
-  //         return 'yarn dlx'
-  //       }
-  //       if (pkgManager === 'bun') {
-  //         return 'bun x'
-  //       }
-  //       // Use `npm exec` in all other cases,
-  //       // including Yarn 1.x and other custom npm clients.
-  //       return 'npm exec'
-  //     })
-
-  //   const [command, ...args] = fullCustomCommand.split(' ')
-  //   // we replace TARGET_DIR here because targetDir may include a space
-  //   const replacedArgs = args.map((arg) =>
-  //     arg.replace('TARGET_DIR', () => targetDir),
-  //   )
-  //   const { status } = spawn.sync(command, replacedArgs, {
-  //     stdio: 'inherit',
-  //   })
-  //   process.exit(status ?? 0)
-  // }
 
   console.log(`\nScaffolding project in ${root}...`)
 
@@ -276,7 +218,8 @@ async function init() {
   }
 
   const files = fs.readdirSync(templateDir)
-  for (const file of files.filter((f) => f !== 'package.json')) {
+  for (const file of files) {
+    if (file === 'package.json' || file === '.git') continue;
     write(file)
   }
 
