@@ -1,6 +1,6 @@
 {
   "name": "create-yzc-app",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "create a yzc app project with gitlab template",
   "type": "module",
   "main": "index.js",
