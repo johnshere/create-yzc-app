@@ -285,6 +285,7 @@ async function init() {
   )
 
   pkg.name = packageName || getProjectName()
+  pkg.version = '1.0.0'
 
   write('package.json', JSON.stringify(pkg, null, 2) + '\n')
 
