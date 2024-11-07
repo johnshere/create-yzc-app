@@ -1,11 +1,11 @@
 {
-  "name": "create-project",
-  "version": "8.0.4",
-  "description": "create a project with gitlab template",
+  "name": "create-yzc-app",
+  "version": "1.0.0",
+  "description": "create a yzc app project with gitlab template",
   "type": "module",
   "main": "index.js",
   "bin": {
-    "create-project": "index.js"
+    "create-yzc-app": "index.js"
   },
   "scripts": {
     "dev": "unbuild --stub",

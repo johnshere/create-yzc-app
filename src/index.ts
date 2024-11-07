@@ -33,7 +33,7 @@ const cwd = process.cwd()
 
 // prettier-ignore
 const helpMessage = `\
-Usage: create-project [OPTION]... [DIRECTORY]
+Usage: create-yzc-app [OPTION]... [DIRECTORY]
 
 Create a new project.
 

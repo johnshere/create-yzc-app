@@ -1,6 +1,6 @@
-# create-project
+# create-yzc-app
 
-create a project with gitlab template
+create a yzc app project with gitlab template
 
 ## 本地调试
 
