@@ -24,9 +24,10 @@ const {
 const argv = minimist<{
   template?: string
   help?: boolean
+  version?: boolean
 }>(process.argv.slice(2), {
-  default: { help: false },
-  alias: { h: 'help', t: 'template' },
+  default: { help: false, version: false },
+  alias: { h: 'help', t: 'template', v: 'version' },
   string: ['_'],
 })
 const cwd = process.cwd()
@@ -38,7 +39,9 @@ Usage: create-yzc-app [OPTION]... [DIRECTORY]
 Create a new project.
 
 Options:
-  -t, --template NAME        use a specific template
+  -t, --template NAME         use a specific template
+  -v, --version               display version number
+  -h, --help                  display this help message
 
 Available templates:
 ${yellow    ('mobile project'  )}
@@ -78,14 +81,25 @@ const renameFiles: Record<string, string | undefined> = {
 const defaultTargetDir = 'project'
 
 async function init() {
-  const argTargetDir = formatTargetDir(argv._[0])
-  const argTemplate = argv.template || argv.t
-
-  const help = argv.help
+  const help = argv.help || argv.h // 获取 help 参数
   if (help) {
     console.log(helpMessage)
     return
   }
+
+  const version = argv.version || argv.v // 获取 version 参数
+  // 处理 -v 参数
+  if (version) {
+    // 从 package.json 中读取版本号
+    const packageJsonPath = path.join(cwd, 'package.json');
+    const packageJsonContent = fs.readFileSync(packageJsonPath, 'utf-8');
+    const packageJson = JSON.parse(packageJsonContent);
+    console.log(packageJson.version);
+    return;
+  }
+  
+  const argTargetDir = formatTargetDir(argv._[0])
+  const argTemplate = argv.template || argv.t
 
   let targetDir = argTargetDir || defaultTargetDir
   const getProjectName = () => path.basename(path.resolve(targetDir))
@@ -196,6 +210,10 @@ async function init() {
 
   // determine template
   let template: string = framework?.name || argTemplate
+  if (template === FRAMEWORKS[2].name) {
+    console.log(redBright('Test is over!'));
+    return
+  }
 
   const pkgInfo = pkgFromUserAgent(process.env.npm_config_user_agent)
   const pkgManager = pkgInfo ? pkgInfo.name : 'npm'
