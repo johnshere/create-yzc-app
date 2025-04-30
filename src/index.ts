@@ -91,7 +91,7 @@ async function init() {
   // 处理 -v 参数
   if (version) {
     // 从 package.json 中读取版本号
-    const packageJsonPath = path.join(fileURLToPath(import.meta.url), 'package.json');
+    const packageJsonPath = path.join(fileURLToPath(import.meta.url), '../package.json');
     const packageJsonContent = fs.readFileSync(packageJsonPath, 'utf-8');
     const packageJson = JSON.parse(packageJsonContent);
     console.log(packageJson.version);
