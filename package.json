@@ -12,7 +12,6 @@
     "dev": "unbuild --stub & node ./dist/index.mjs",
     "build": "unbuild",
     "typecheck": "tsc --noEmit",
-    "preinstall": "npx only-allow pnpm",
     "postinstall": "git clone http://gitlab.ahyzc.com/yzc-public-tools/template-mobile.git & git clone http://gitlab.ahyzc.com/yzc-public-tools/template-desktop.git",
     "prepublishOnly": "npm run build"
   },
